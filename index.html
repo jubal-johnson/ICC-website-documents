@@ -92,7 +92,7 @@
 <script>
 
 // ===== LOAD JSON =====
-fetch("Planned.json")
+fetch("planned.json")
   .then(response => response.json())
   .then(data => {
     const table = document.querySelectorAll("table tbody")[0];
@@ -116,7 +116,7 @@ fetch("Planned.json")
 
 
 // ===== LOAD XML =====
-fetch("In-progress.xml")
+fetch("inprogress.xml")
   .then(response => response.text())
   .then(str => {
     const parser = new DOMParser();
