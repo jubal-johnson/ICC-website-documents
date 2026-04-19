@@ -91,8 +91,8 @@
 <!-- ===== SCRIPT ===== -->
 <script>
 
-// LOAD JSON
-fetch("planned.json")
+// ===== LOAD JSON =====
+fetch("Planned.json")
   .then(response => response.json())
   .then(data => {
     const table = document.querySelectorAll("table tbody")[0];
@@ -111,16 +111,18 @@ fetch("planned.json")
         </tr>
       `;
     });
-  });
+  })
+  .catch(err => console.error("JSON error:", err));
 
-// LOAD XML
-fetch("inprogress.xml")
+
+// ===== LOAD XML =====
+fetch("In-progress.xml")
   .then(response => response.text())
   .then(str => {
     const parser = new DOMParser();
     const xml = parser.parseFromString(str, "text/xml");
 
-    const rows = xml.getElementsByTagName("project");
+    const rows = xml.getElementsByTagName("ROW");
     const table = document.querySelectorAll("table tbody")[1];
     table.innerHTML = "";
 
@@ -130,16 +132,17 @@ fetch("inprogress.xml")
       table.innerHTML += `
         <tr class="in-progress">
           <td>${r.getElementsByTagName("Project_Name")[0].textContent}</td>
-          <td>${r.getElementsByTagName("Company")[0].textContent}</td>
+          <td>${r.getElementsByTagName("Company_Name")[0].textContent}</td>
           <td>${r.getElementsByTagName("Budget")[0].textContent}</td>
-          <td>${r.getElementsByTagName("Province")[0].textContent}</td>
-          <td>${r.getElementsByTagName("Start_Date")[0].textContent}</td>
-          <td>${r.getElementsByTagName("End_Date")[0].textContent}</td>
+          <td>${r.getElementsByTagName("Province_Name")[0].textContent}</td>
+          <td>${r.getElementsByTagName("Start_date")[0].textContent}</td>
+          <td>${r.getElementsByTagName("Est_end_date")[0].textContent}</td>
           <td>${r.getElementsByTagName("Status")[0].textContent}</td>
         </tr>
       `;
     }
-  });
+  })
+  .catch(err => console.error("XML error:", err));
 
 </script>
 
